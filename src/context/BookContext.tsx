@@ -41,15 +41,16 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                     publisher: item.volumeInfo.publisher,
                     pageCount: item.volumeInfo.pageCount || 0,                    
                     description: item.volumeInfo.description || "",
-                    tumbnail: item.volumeInfo.imageLinks?.thumbnail || null,
+                    thumbnail: item.volumeInfo.imageLinks?.thumbnail || null,
                     language: item.volumeInfo.language,
                     authors: item.volumeInfo.authors || [],
                     categories: item.volumeInfo.categories || [],
+                    publishedDate: item.volumeInfo.publishedDate
                 }));
 
                 setBooks(mappedBooks); 
 
-             /*   console.log(data.items);
+                console.log(data.items);
                 console.log(data.items[0].id);
                 console.log(data.items[0].volumeInfo.title);
                 console.log(data.items[0].volumeInfo.subtitle);
@@ -60,7 +61,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                 console.log(data.items[0].volumeInfo.publisher);
                 console.log(data.items[0].volumeInfo.pageCount);
                 console.log(data.items[0].volumeInfo.publishedDate);        
-               */ 
+                
           
             }
 

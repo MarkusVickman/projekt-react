@@ -4,11 +4,12 @@ export interface Book {
     title: string,
     subtitle: string | null,
     publisher: string,
+    publishedDate: string,
     pageCount: number,
     isbn10: string | null,
     isbn13: string | null,
     description: string,
-    tumbnail: string | null,
+    thumbnail: string | undefined,
     language: string,
     authors: string[],
     categories: string[]

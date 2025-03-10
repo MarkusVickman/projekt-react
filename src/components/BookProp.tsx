@@ -13,30 +13,33 @@ const BookProp: React.FC<BookProps> = ({ book }) => {
   return (
     <>
 
-      <div className="card" key={book.id}>
+      <div className="card" key={book.id} title="Recensioner och läs mer">
         <div className="card-content mt-6">
           <div className="media">
             <div className="media-left">
               <figure className="image">
                 <img width="128"
-                  src="https://bulma.io/assets/images/placeholders/96x96.png"
-                  alt="Placeholder image"
+                  src={book.thumbnail}
+                  alt="Omslagsbild"
                 />
               </figure>
             </div>
             <div className="media-content">
-              <p className="title is-4">John Smith</p>
-              <p className="subtitle is-6">@johnsmith</p>
+              <p className="title is-4">{book.title}</p>
+              <p className="subtitle is-6">{book.subtitle}</p>
+              <div className="content">
+                <ul>
+                  <li>Författare: {book.authors.join(", ")}</li>
+                  <li>Sidor: {book.pageCount}</li>
+                  <li>Språk: {book.language}</li>
+                  <li>Utgiven: {book.publishedDate}</li>
+                </ul>
+              </div>
             </div>
+
           </div>
 
-          <div className="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-            iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-            <a href="#">#responsive</a>
-            <br />
-            <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
+
         </div>
       </div>
     </>
