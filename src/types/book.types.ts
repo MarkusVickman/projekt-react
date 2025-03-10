@@ -4,6 +4,7 @@ export interface Book {
     title: string,
     subtitle: string | null,
     publisher: string,
+    pageCount: number,
     isbn10: string | null,
     isbn13: string | null,
     description: string,
@@ -16,7 +17,7 @@ export interface Book {
 
 //Interface för att dela AuthContext med dess metoder och interfaces till sidor och komponenter
 export interface BookContextType {
-    book: Book | null,
+    books: Book[],
     bookSearch: (search: string) => Promise<void>;
 }
 
