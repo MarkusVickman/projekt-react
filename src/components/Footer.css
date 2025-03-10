@@ -1,0 +1,17 @@
+/*
+CSS är specifik till Footer.tsx.
+*/
+
+footer {
+    height: 50px;
+    background-color: rgba(0, 126, 48, 0.397);
+    text-align: center;
+    position: sticky;
+    z-index: 2;
+    top: 100vh;
+    margin-top: 20px;
+  }
+  
+  footer p {
+    padding-top: 15px;
+  }
