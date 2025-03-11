@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             const decoded: User = jwtDecode(data.access_token);
 
             // Lagrar jwt i localstorage
-            localStorage.setItem("trespasser", data.access_token);
+            localStorage.setItem("youNeedThis", data.access_token);
 
             // Deklarerar setUser utifrån avkodad jwt
             setUser({
@@ -76,7 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     // Kontrollerar om användaren har en giltig token
     const checkToken = async () => {
-        const token = localStorage.getItem("trespasser");
+        const token = localStorage.getItem("youNeedThis");
 
         if (!token) {
             return;
@@ -100,7 +100,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             }
 
         } catch (error) {
-            localStorage.removeItem("trespasser");
+            localStorage.removeItem("youNeedThis");
             setUser(null);
             console.log("Error: " + error);
         }
@@ -108,7 +108,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     // Loggar ut användare
     const logout = () => {
-        localStorage.removeItem("trespasser");
+        localStorage.removeItem("youNeedThis");
         setUser(null);
     }
 

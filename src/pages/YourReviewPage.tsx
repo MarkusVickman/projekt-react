@@ -15,6 +15,10 @@ const YourReviewPage = () => {
   const { user } = useAuth();
   const [newHeading, setNewHeading] = useState('');
   const [newAbout, setNewAbout] = useState('');
+  const [newBookId, setNewBookId] = useState('');
+  const [newLikes, setNewLikes] = useState<number>(0);
+  const [newViews, setNewViews] = useState<number>(0);
+  const [newScore, setNewScore] = useState<number>(0);
 
   // Formulärhantering
   const [formHeader, setFormHeader] = useState('Nytt inlägg');
@@ -42,7 +46,11 @@ const YourReviewPage = () => {
     if (checkInput()) {
       const newReview: PostReview = {
         heading: newHeading,
-        about: newAbout
+        about: newAbout,
+        bookId: newBookId,
+        score: newScore,
+        views: newViews,
+        likes: newLikes
       }
       postReview(newReview);
     }
@@ -54,7 +62,11 @@ const YourReviewPage = () => {
     if (checkInput()) {
       const newReview: PostReview = {
         heading: newHeading,
-        about: newAbout
+        about: newAbout,
+        bookId: newBookId,
+        score: newScore,
+        views: newViews,
+        likes: newLikes
       }
       if (id !== null) {
         putReview(newReview, id);

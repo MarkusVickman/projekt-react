@@ -26,7 +26,7 @@ export interface PostReview {
 //Interface för att dela reviewContext med dess metoder och interfaces till sidor och komponenter
 export interface ReviewContextType {
     reviews: Review[] | null,
-    allReviews: () => void,    
+    getReviews: () => void,    
     postReview: (review: PostReview) => void,
     putReview: (review: PostReview, id: number) => void,
     deleteReview: (id: number) => void,
