@@ -17,7 +17,7 @@ const LoginPage = () => {
     //Vid start av sidan kontrolleras om användaren redan är inloggad.
     useEffect(() => {
         if (user) {
-            navigate("/personal")
+            navigate("/YourReviewPage")
         }
     }, [user])
 
@@ -29,7 +29,7 @@ const LoginPage = () => {
         if (checkInput()) {
             try {
                 await login({ email, password });
-                navigate("/your-page");
+                navigate("//YourReviewPage");
             } catch (error) {
                 setError("Felaktig inloggning. Säkerställ att lösenord och email är korrekt.")
             }

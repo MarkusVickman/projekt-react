@@ -87,6 +87,8 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
     const putReview = async (reviews: PostReview, id: number) => {
         const token = localStorage.getItem("youNeedThis");
 
+        console.log(reviews);
+
         if (!token) {
             return;
         }

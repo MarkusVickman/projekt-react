@@ -7,7 +7,7 @@ interface BookProps {
 };
 
 //Child som tar emot props enligt interface BlogProps samt Blog
-const BookProp: React.FC<BookProps> = ({ book }) => {
+const BookArticleProp: React.FC<BookProps> = ({ book }) => {
 
   //Returnerar blogginlägg som visas på startsidan, singlePage samt FollowUserPage
   return (
@@ -68,4 +68,4 @@ const BookProp: React.FC<BookProps> = ({ book }) => {
   )
 }
 
-export default BookProp
+export default BookArticleProp

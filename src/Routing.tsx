@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { BookProvider } from './context/BookContext';
 import YourReviewPage from './pages/YourReviewPage';
+import { ReviewProvider } from './context/ReviewContext';
 
 /*
 -Routing som dirigerar till alla undersidor.
@@ -23,8 +24,8 @@ const router = createBrowserRouter([
                 element: <BookProvider><HomePage /></BookProvider>
             },
             {
-                path: "/personal",
-                element: (<ProtectedRoute> <BookProvider><YourReviewPage /></BookProvider> </ProtectedRoute>)
+                path: "/YourReviewPage/:bookId",
+                element: (<ProtectedRoute> <ReviewProvider><YourReviewPage /></ReviewProvider> </ProtectedRoute>)
             },
             {
                 path: "/login",

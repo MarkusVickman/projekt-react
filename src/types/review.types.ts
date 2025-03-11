@@ -6,9 +6,9 @@ export interface Review {
     heading: string,
     date: Date,
     about: string,
-    score: number | null,
-    likes: number | null,
-    views: number | null,
+    score: number,
+    likes: number,
+    views: number,
     email: string,
     name: string
 }
@@ -18,9 +18,9 @@ export interface PostReview {
     bookId: string,
     heading: string,
     about: string,
-    score: number | null,
-    likes: number | null,
-    views: number | null
+    score: number
+   // likes: number | null,
+   // views: number | null
 }
 
 //Interface för att dela reviewContext med dess metoder och interfaces till sidor och komponenter
