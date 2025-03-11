@@ -28,6 +28,10 @@ const router = createBrowserRouter([
                 element: (<ProtectedRoute> <ReviewProvider><YourReviewPage /></ReviewProvider> </ProtectedRoute>)
             },
             {
+                path: "/SingleBookPage/:bookId",
+                element: (<ProtectedRoute> <BookProvider><YourReviewPage /></BookProvider> </ProtectedRoute>)
+            },
+            {
                 path: "/login",
                 element: <LoginPage />
             },

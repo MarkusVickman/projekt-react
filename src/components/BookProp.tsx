@@ -40,7 +40,7 @@ const BookProp: React.FC<BookProps> = ({ book }) => {
 
           </div>
           <div className="card-footer">
-            <button className="button mt-2">Läs mer</button>
+            <button className="button mt-2"><NavLink to={"/SingleBookPage/" + book.id}>Läs mer</NavLink></button>
             <button className="button mt-2"><NavLink to={"/YourReviewPage/" + book.id}>Mina recensioner</NavLink></button>
             <span className="icon-text mt-3 ml-2">
               <span className="icon">
