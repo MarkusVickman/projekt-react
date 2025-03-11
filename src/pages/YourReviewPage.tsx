@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from "react"
-import { useBook } from "../context/BookContext";
-import { Book, PostBlog } from "../types/book.types"
+import { useReview } from "../context/ReviewContext";
+import { Review, PostReview } from "../types/review.types"
 import { useAuth } from "../context/AuthContext";
-import AdminProp from "../components/BlogAdminProp";
+import ReviewAdminProp from "../components/ReviewAdminProp";
 
 const YourReviewPage = () => {
 
@@ -11,7 +11,7 @@ const YourReviewPage = () => {
   -läser in funktioner och data från BookContext
   -formulärdata
   */
-  const { userReviews, getReviews, reviews, postReview, putReview, deleteReview } = useBook();
+  const { userReviews, getReviews, reviews, postReview, putReview, deleteReview } = useReview();
   const { user } = useAuth();
   const [newHeading, setNewHeading] = useState('');
   const [newAbout, setNewAbout] = useState('');
@@ -40,11 +40,11 @@ const YourReviewPage = () => {
     e.preventDefault();
 
     if (checkInput()) {
-      const newPost: PostBlog = {
+      const newReview: PostReview = {
         heading: newHeading,
         about: newAbout
       }
-      postReview(newPost);
+      postReview(newReview);
     }
   }
 
@@ -168,14 +168,14 @@ const YourReviewPage = () => {
       {/* skriver ut aktiva användarens flöde */}
       <div className="container mt-5">
         <h2 className="title">Dina recensioner</h2>
-        {userReviews.map((review: Review) => (<AdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={fillForm} />))}
+        {userReviews.map((review: Review) => (<ReviewAdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={fillForm} />))}
       </div>
 
       {/* Om aktiva användaren är en admin så skrivs alla inlägg ut som också går att redigera samt ta bort */}
       {user && user.isAdmin ? (
         <div className="container mt-5">
           <h2 className="title">Admin</h2>
-          {reviews.map((review: Review) => (<AdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={fillForm} />))}
+          {reviews.map((review: Review) => (<ReviewAdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={fillForm} />))}
         </div>
       ) : null}
     </>
