@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import { BookProvider } from './context/BookContext';
+import YourReviewPage from './pages/YourReviewPage';
 
 /*
 -Routing som dirigerar till alla undersidor.
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <BookProvider><HomePage /></BookProvider>
+            },
+            {
+                path: "/personal",
+                element: (<ProtectedRoute> <BookProvider><YourReviewPage /></BookProvider> </ProtectedRoute>)
             },
             {
                 path: "/login",

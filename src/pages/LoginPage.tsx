@@ -29,7 +29,7 @@ const LoginPage = () => {
         if (checkInput()) {
             try {
                 await login({ email, password });
-                navigate("/personal");
+                navigate("/your-page");
             } catch (error) {
                 setError("Felaktig inloggning. Säkerställ att lösenord och email är korrekt.")
             }

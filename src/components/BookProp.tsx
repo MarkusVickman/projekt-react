@@ -37,8 +37,29 @@ const BookProp: React.FC<BookProps> = ({ book }) => {
               </div>
             </div>
 
-          </div>
 
+          </div>
+          <div className="card-footer">
+            <button className="button mt-2">Läs mer</button>
+            <span className="icon-text mt-3 ml-2">
+              <span className="icon">
+                <i className="fa-regular fa-thumbs-up"></i>
+              </span>
+              <span>Gilla</span>
+            </span>
+            <span className="icon-text mt-3 ml-2">
+              <span className="icon">
+                <i className="fa-regular fa-eye"></i>
+              </span>
+              <span>Visningar</span>
+            </span>
+            <span className="icon-text mt-3 ml-2">
+              <span className="icon">
+                <i className="fa-regular fa-bookmark"></i>
+              </span>
+              <span>Bokmärke</span>
+            </span>
+          </div>
 
         </div>
       </div>
