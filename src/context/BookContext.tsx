@@ -22,7 +22,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
         console.log("SearchTerm: " + search);
 
         try {
-            const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`, {
+            const res = await fetch(`https://www.googleapis.com/books/v1/volumes${"?q=" + search}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -32,26 +32,27 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
             if (res.ok) {
                 const data = await res.json();
 
-
+                console.log(data);
 
                 // Mappa hela arrayen av böcker till ditt Book-interface
                 const mappedBooks: Book[] = data.items.map((item: any) => ({
-                    id: item.id,
-                    title: item.volumeInfo.title,
-                    subtitle: item.volumeInfo.subtitle || null,
-                    publisher: item.volumeInfo.publisher,
-                    pageCount: item.volumeInfo.pageCount || 0,                    
-                    description: item.volumeInfo.description || "",
-                    thumbnail: item.volumeInfo.imageLinks?.thumbnail || null,
-                    language: item.volumeInfo.language,
-                    authors: item.volumeInfo.authors || [],
-                    categories: item.volumeInfo.categories || [],
-                    publishedDate: item.volumeInfo.publishedDate,
-                    isbn: item.volumeInfo.industryIdentifiers
+                    id: item.id || "Ingen ID",
+                    title: item.volumeInfo.title || "Titel saknas",
+                    subtitle: item.volumeInfo.subtitle || "Ingen undertitel",
+                    publisher: item.volumeInfo.publisher || "Utgivare saknas",
+                    pageCount: item.volumeInfo.pageCount || 0,
+                    description: item.volumeInfo.description || "Beskrivning saknas",
+                    thumbnail: item.volumeInfo.imageLinks?.thumbnail || "Ingen bild",
+                    language: item.volumeInfo.language || "Språk saknas",
+                    authors: item.volumeInfo.authors || ["Författare saknas"],
+                    categories: item.volumeInfo.categories || ["Kategori saknas"],
+                    publishedDate: item.volumeInfo.publishedDate || "Publiceringsdatum saknas",
+                    isbn: item.volumeInfo.industryIdentifiers ||  []
                 }));
 
-                console.log(mappedBooks);
-                setBooks(mappedBooks); 
+                console.log(mappedBooks[0].id);
+                console.log(mappedBooks[0]);
+                setBooks(mappedBooks);
             }
 
         } catch (error) {

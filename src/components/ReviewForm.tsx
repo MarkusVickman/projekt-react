@@ -25,7 +25,7 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
     const [newHeading, setNewHeading] = useState('');
     const [newAbout, setNewAbout] = useState('');
     const [newBookId, setNewBookId] = useState('');
-    const [newScore, setNewScore] = useState<number>(0);
+    const [newScore, setNewScore] = useState<number>(1);
 
     // Formulärhantering
     const [formHeader, setFormHeader] = useState('Ny recension');

@@ -22,25 +22,14 @@ const SingleBookPage = () => {
 
     //Läser in alla inlägg
     useEffect(() => {
-        getReviews();
-
-        if (typeof bookId === "string" /*&& !item */&& books) {
-            // Återsök böcker om state är tomt
-            bookSearch(bookId); // Skicka en sökfråga om
-            item = books.find(item => item.id === bookId);
+        if (item === undefined) {
+            getReviews();
+            bookSearch("/" + bookId);
+            item = books?.find(item => item.id === bookId);
         }
+
     }, []);
-    
 
-   
-
-/*
-    if (typeof bookId === "string" && !item && books) {
-        // Återsök böcker om state är tomt
-        bookSearch(bookId); // Skicka en sökfråga om nödvändigt
-        item = books.find(item => item.id === bookId);
-    }
-*/
     // Lagra alla recensioner som matchar bookId
     let bookReviews: Review[] = reviews?.filter((item: Review) => item.bookId === bookId) || [];
 
@@ -49,7 +38,7 @@ const SingleBookPage = () => {
         return (
             <>
                 <h1 className="title">En bok</h1>
-                <p><b>Boken laddas...</b></p>
+                <p><b>Boken försöker laddas...</b></p>
             </>
         );
     }
