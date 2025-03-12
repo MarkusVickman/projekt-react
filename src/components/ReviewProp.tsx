@@ -10,8 +10,6 @@ interface ReviewProps {
 //Child som tar emot props enligt interface ReviewProps samt Review och metoder
 const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
 
-
-
     //Skickar PUT med ett uppdaterad recension, kräver ok bearer samt id 
     const likeReview = async (id: number) => {
         const token = localStorage.getItem("youNeedThis");
@@ -24,13 +22,12 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + token
-                },
-                body: JSON.stringify({id: id})
-            })
+                }
+            });
 
             // Vid ok respons uppdateras review-data
             if (res.ok) {
-                
+                console.log("Review liked successfully!");
             }
 
         } catch (error) {
@@ -40,14 +37,9 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
     }
 
 
-
     //Returnerar styling och struktur för recensioner som visas på YourReviewPage med redigeringsmöjligheter
     return (
         <>
-
-
-
-
             <article className="card" key={review.id} title="Recension">
                 <div className=" mt-6">
                     <div className="card-content">
