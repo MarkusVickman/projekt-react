@@ -19,6 +19,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
     // Kontrollerar om användaren har en giltig token
     const bookSearch = async (search: string) => {
 
+        console.log("SearchTerm: " + search);
 
         try {
             const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`, {
@@ -45,24 +46,12 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                     language: item.volumeInfo.language,
                     authors: item.volumeInfo.authors || [],
                     categories: item.volumeInfo.categories || [],
-                    publishedDate: item.volumeInfo.publishedDate
+                    publishedDate: item.volumeInfo.publishedDate,
+                    isbn: item.volumeInfo.industryIdentifiers
                 }));
 
+                console.log(mappedBooks);
                 setBooks(mappedBooks); 
-
-                console.log(data.items);
-                console.log(data.items[0].id);
-                console.log(data.items[0].volumeInfo.title);
-                console.log(data.items[0].volumeInfo.subtitle);
-                console.log(data.items[0].volumeInfo.authors);
-                console.log(data.items[0].volumeInfo.categories);
-                console.log(data.items[0].volumeInfo.imageLinks.thumbnail);
-                console.log(data.items[0].volumeInfo.language);
-                console.log(data.items[0].volumeInfo.publisher);
-                console.log(data.items[0].volumeInfo.pageCount);
-                console.log(data.items[0].volumeInfo.publishedDate);        
-                
-          
             }
 
         } catch (error) {

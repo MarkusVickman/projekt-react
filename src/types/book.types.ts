@@ -1,3 +1,9 @@
+//Interface för ISBN som används i Book
+export interface ISBN {
+    type: string;
+    identifier: string;
+}
+
 //Interface för book
 export interface Book {
     id: string,
@@ -6,8 +12,7 @@ export interface Book {
     publisher: string,
     publishedDate: string,
     pageCount: number,
-    isbn10: string | null,
-    isbn13: string | null,
+    isbn: ISBN[] | null,
     description: string,
     thumbnail: string | undefined,
     language: string,
@@ -18,7 +23,7 @@ export interface Book {
 
 //Interface för att dela AuthContext med dess metoder och interfaces till sidor och komponenter
 export interface BookContextType {
-    books: Book[],
+    books: Book[] | null,
     bookSearch: (search: string) => Promise<void>;
 }
 

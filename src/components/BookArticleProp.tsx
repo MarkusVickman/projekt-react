@@ -9,6 +9,8 @@ interface BookProps {
 //Child som tar emot props enligt interface BlogProps samt Blog
 const BookArticleProp: React.FC<BookProps> = ({ book }) => {
 
+
+
   //Returnerar blogginlägg som visas på startsidan, singlePage samt FollowUserPage
   return (
     <>
@@ -33,34 +35,24 @@ const BookArticleProp: React.FC<BookProps> = ({ book }) => {
                   <li>Sidor: {book.pageCount}</li>
                   <li>Språk: {book.language}</li>
                   <li>Utgiven: {book.publishedDate}</li>
+                  <li>Kategori: {book.categories}</li>
+                  <li>Bokförlag: {book.publisher}</li>
+                  <li>
+                    ISBN:
+                    <ul>
+                      {book.isbn?.map((isbnEntry, index) => (
+                        <li key={index}>
+                          {isbnEntry.type}: {isbnEntry.identifier}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
                 </ul>
               </div>
             </div>
 
-
           </div>
-          <div className="card-footer">
-            <button className="button mt-2">Läs mer</button>
-            <button className="button mt-2"><NavLink to={"/YourReviewPage/" + book.id}>Mina recensioner</NavLink></button>
-            <span className="icon-text mt-3 ml-2">
-              <span className="icon">
-                <i className="fa-regular fa-thumbs-up"></i>
-              </span>
-              <span>Gilla</span>
-            </span>
-            <span className="icon-text mt-3 ml-2">
-              <span className="icon">
-                <i className="fa-regular fa-eye"></i>
-              </span>
-              <span>Visningar</span>
-            </span>
-            <span className="icon-text mt-3 ml-2">
-              <span className="icon">
-                <i className="fa-regular fa-bookmark"></i>
-              </span>
-              <span>Bokmärke</span>
-            </span>
-          </div>
+          <div className="content">{book.description}</div>
 
         </div>
       </div>

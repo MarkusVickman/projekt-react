@@ -33,6 +33,7 @@ const Header = () => {
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
                         <NavLink to="/" className="navbar-item" onClick={toggleBurgerMenu}>Startsida</NavLink>
+                        {user ? <NavLink to="/YourReviewPage" className="navbar-item" onClick={toggleBurgerMenu}>Dina recensioner</NavLink> : null}
                         <NavLink to="/about" className="navbar-item" onClick={toggleBurgerMenu}>Om oss</NavLink>
                     </div>
                 </div>

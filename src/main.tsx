@@ -4,10 +4,12 @@ import { RouterProvider } from 'react-router-dom'
 import './index.css'
 import router from './Routing.tsx';
 import { AuthProvider } from './context/AuthContext.tsx';
+import { BookProvider } from './context/BookContext.tsx';
+import { ReviewProvider } from './context/ReviewContext.tsx';
 
 //AuthProvider ger tillgång till Authtentiserings contexten
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider><RouterProvider router={router} /></AuthProvider>
+    <AuthProvider><BookProvider><ReviewProvider><RouterProvider router={router} /></ReviewProvider></BookProvider></AuthProvider>
   </StrictMode>,
 )
