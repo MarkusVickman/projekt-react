@@ -1,9 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { Review } from "../types/review.types";
-import { format } from "date-fns";
-import { sv } from "date-fns/locale";
-
-
 
 
 //Interface för propsen som komponenten tar emot
@@ -19,12 +15,11 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review, fillForm, submitDelete
     //Returnerar styling och struktur för recensioner som visas på YourReviewPage med redigeringsmöjligheter
     return (
         <>
-
-
             <article className="card" key={review.id} title="Recension">
                 <div className=" mt-6">
                     <div className="card-content">
                         <p className="title is-4 ">{review.heading}</p>
+                        <p className="subtitle is-6" >{review.subTitle}</p>
                         <p className="">
                             {review.about}
                         </p>
@@ -37,6 +32,7 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review, fillForm, submitDelete
                             </span>
                             <span>{review.likes}</span>
                         </span>
+
                         <span className="icon-text card-footer-item">
                             <span className="icon">
                                 <i className="fa-regular fa-star"></i>
@@ -46,11 +42,10 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review, fillForm, submitDelete
                         <p className="card-footer-item">{review.date.toString().split('T')[0]}</p>
                     </div>
 
-
                     <div className="card-footer">
                         <button className="card-footer-item" onClick={() => fillForm(review)}>Redigera</button>
                         <button className="card-footer-item" onClick={() => submitDelete(review.id)}>Ta bort</button>
-                        <button className="card-footer-item"><NavLink to={"/SingleBookPage/" + review.bookId}>Visa Bok</NavLink></button>
+                        <NavLink to={"/SingleBookPage/" + review.bookId} className="card-footer-item"><button>Visa Bok</button></NavLink>
                     </div>
 
                 </div>

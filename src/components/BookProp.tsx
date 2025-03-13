@@ -6,13 +6,12 @@ interface BookProps {
   book: Book;
 };
 
-//Child som tar emot props enligt interface BlogProps samt Blog
+//Child som tar emot props enligt interface BookProps samt Book
 const BookProp: React.FC<BookProps> = ({ book }) => {
 
-  //Returnerar blogginlägg som visas på startsidan, singlePage samt FollowUserPage
+  //Returnerar korta bokinlägg som visas på startsidan
   return (
     <>
-
       <div className="card" key={book.id} title="Recensioner och läs mer">
         <div className="card-content mt-6">
           <div className="media">
@@ -36,11 +35,9 @@ const BookProp: React.FC<BookProps> = ({ book }) => {
                 </ul>
               </div>
             </div>
-
-
           </div>
           <div className="card-footer">
-          <NavLink to={"/SingleBookPage/" + book.id} className="card-footer-item"><button className="card-footer-item button mt-2">Läs mer</button></NavLink>
+            <NavLink to={"/SingleBookPage/" + book.id} className="card-footer-item"><button className="card-footer-item button mt-2">Läs mer</button></NavLink>
           </div>
         </div>
       </div>

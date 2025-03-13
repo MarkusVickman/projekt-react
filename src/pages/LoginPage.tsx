@@ -56,7 +56,7 @@ const LoginPage = () => {
     return (
         <>
             <div className="container">
-                <h1 className="title ">Logga in på ditt konto</h1>
+                <h1 className="title has-text-centered">Logga in på ditt konto</h1>
 
                 <form onSubmit={handleSubmit}>
 

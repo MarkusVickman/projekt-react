@@ -4,6 +4,7 @@ export interface Review {
     id: number,
     bookId: string,
     heading: string,
+    subTitle: string,
     date: Date,
     about: string,
     score: number,
@@ -17,6 +18,7 @@ export interface Review {
 export interface PostReview {
     bookId: string,
     heading: string,
+    subTitle: string | null,
     about: string,
     score: number
    // likes: number | null,
@@ -30,6 +32,7 @@ export interface ReviewContextType {
     postReview: (review: PostReview) => void,
     putReview: (review: PostReview, id: number) => void,
     deleteReview: (id: number) => void,
-    userReviews: Review[] | null
+    userReviews: Review[] | null,
+    likeReview: (id: number) => void
 }
 

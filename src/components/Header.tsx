@@ -43,11 +43,7 @@ const Header = () => {
                     <div className="navbar-item">
                         <div className="buttons">
                             {!user ? <NavLink to="/register" className="button is-primary is-rounded">Registrera</NavLink> : null}
-
-                            {
-                                user ? <button className="button is-light is-rounded" onClick={logout}>Logga ut</button> : <NavLink to="/login" className="button is-light is-rounded">Logga in</NavLink>
-                            }
-
+                            {user ? <button className="button is-light is-rounded" onClick={logout}>Logga ut</button> : <NavLink to="/login" className="button is-light is-rounded">Logga in</NavLink>}
                         </div>
                     </div>
                 </div>

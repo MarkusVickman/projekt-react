@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext, ReactNode } from "react";
+import { createContext, useState, useContext, ReactNode } from "react";
 import { Book, BookContextType } from "../types/book.types";
 
 // Initierar BookContext
@@ -12,17 +12,14 @@ export interface BookProviderProps {
 // exporterar en komponent med namnet BookProvider
 export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
-    // initierar user
+    // initierar books
     const [books, setBooks] = useState<Book[] | null>(null);
 
-
-    // Kontrollerar om användaren har en giltig token
+    // Metod som tar in en söksträng innehållandes både sökord och prefix för ifall det är sök eller för att besöka specifik bok
     const bookSearch = async (search: string) => {
 
-        console.log("SearchTerm: " + search);
-
         try {
-            const res = await fetch(`https://www.googleapis.com/books/v1/volumes${"?q=" + search}`, {
+            const res = await fetch(`https://www.googleapis.com/books/v1/volumes${search}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -32,37 +29,46 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
             if (res.ok) {
                 const data = await res.json();
 
-                console.log(data);
-
-                // Mappa hela arrayen av böcker till ditt Book-interface
-                const mappedBooks: Book[] = data.items.map((item: any) => ({
-                    id: item.id || "Ingen ID",
-                    title: item.volumeInfo.title || "Titel saknas",
-                    subtitle: item.volumeInfo.subtitle || "Ingen undertitel",
-                    publisher: item.volumeInfo.publisher || "Utgivare saknas",
-                    pageCount: item.volumeInfo.pageCount || 0,
-                    description: item.volumeInfo.description || "Beskrivning saknas",
-                    thumbnail: item.volumeInfo.imageLinks?.thumbnail || "Ingen bild",
-                    language: item.volumeInfo.language || "Språk saknas",
-                    authors: item.volumeInfo.authors || ["Författare saknas"],
-                    categories: item.volumeInfo.categories || ["Kategori saknas"],
-                    publishedDate: item.volumeInfo.publishedDate || "Publiceringsdatum saknas",
-                    isbn: item.volumeInfo.industryIdentifiers ||  []
-                }));
-
-                console.log(mappedBooks[0].id);
-                console.log(mappedBooks[0]);
-                setBooks(mappedBooks);
+                if (search.startsWith("?")) {
+                    // Mappa hela arrayen av böcker till ditt Book-interface om det är en sökning
+                    const mappedBooks: Book[] = data.items.map((item: any) => ({
+                        id: item.id || "Ingen ID",
+                        title: item.volumeInfo.title || "Titel saknas",
+                        subtitle: item.volumeInfo.subtitle || "Ingen undertitel",
+                        publisher: item.volumeInfo.publisher || "Utgivare saknas",
+                        pageCount: item.volumeInfo.pageCount || 0,
+                        description: item.volumeInfo.description || "Beskrivning saknas",
+                        thumbnail: item.volumeInfo.imageLinks?.thumbnail || "Ingen bild",
+                        language: item.volumeInfo.language || "Språk saknas",
+                        authors: item.volumeInfo.authors || ["Författare saknas"],
+                        categories: item.volumeInfo.categories || ["Kategori saknas"],
+                        publishedDate: item.volumeInfo.publishedDate || "Publiceringsdatum saknas",
+                        isbn: item.volumeInfo.industryIdentifiers || []
+                    }));
+                    setBooks(mappedBooks);
+                } else {
+                    // Mappa en bok till ditt Book-interface om det är en specifik bok som efterfrågas
+                    const mappedBook: Book = {
+                        id: data.id || "Ingen ID",
+                        title: data.volumeInfo?.title || "Titel saknas",
+                        subtitle: data.volumeInfo?.subtitle || "Ingen undertitel",
+                        publisher: data.volumeInfo?.publisher || "Utgivare saknas",
+                        pageCount: data.volumeInfo?.pageCount || 0,
+                        description: data.volumeInfo?.description || "Beskrivning saknas",
+                        thumbnail: data.volumeInfo?.imageLinks?.thumbnail || "Ingen bild",
+                        language: data.volumeInfo?.language || "Språk saknas",
+                        authors: data.volumeInfo?.authors || ["Författare saknas"],
+                        categories: data.volumeInfo?.categories || ["Kategori saknas"],
+                        publishedDate: data.volumeInfo?.publishedDate || "Publiceringsdatum saknas",
+                        isbn: data.volumeInfo?.industryIdentifiers || []
+                    };
+                    setBooks([mappedBook]);
+                }
             }
-
         } catch (error) {
             console.log("Error: " + error);
         }
     }
-
-    // Vid start av sidor som använder AuthContext kontrolleras användaren
-    // useEffect(() => {
-    // }, [])
 
     //Returnerar Context med funktioner samt data
     return (

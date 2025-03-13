@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Review } from "../types/review.types";
-
+import { useReview } from "../context/ReviewContext";
 
 //Interface för propsen som komponenten tar emot
 interface ReviewProps {
@@ -10,32 +10,7 @@ interface ReviewProps {
 //Child som tar emot props enligt interface ReviewProps samt Review och metoder
 const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
 
-    //Skickar PUT med ett uppdaterad recension, kräver ok bearer samt id 
-    const likeReview = async (id: number) => {
-        const token = localStorage.getItem("youNeedThis");
-        if (!token) {
-            return;
-        }
-        try {
-            const res = await fetch(`https://project-react-nest-backend-1050979898493.us-central1.run.app/review/like/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + token
-                }
-            });
-
-            // Vid ok respons uppdateras review-data
-            if (res.ok) {
-                console.log("Review liked successfully!");
-            }
-
-        } catch (error) {
-            console.log("Error: " + error);
-        } finally {
-        }
-    }
-
+    const { likeReview } = useReview();
 
     //Returnerar styling och struktur för recensioner som visas på YourReviewPage med redigeringsmöjligheter
     return (
@@ -44,6 +19,7 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
                 <div className=" mt-6">
                     <div className="card-content">
                         <p className="title is-4 ">{review.heading}</p>
+                        <p className="subtitle is-6">{review.subTitle}</p>
                         <p className="">
                             {review.about}
                         </p>
@@ -70,7 +46,6 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
                         <p className="card-footer-item">{review.date.toString().split('T')[0]}</p>
                         <NavLink to={"/SingleBookPage/" + review.bookId} className="card-footer-item"><button className="">Visa Bok</button></NavLink>
                     </div>
-
                 </div>
             </article>
         </>

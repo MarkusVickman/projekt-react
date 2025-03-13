@@ -70,7 +70,7 @@ const RegisterPage = () => {
     return (
         <>
             <div className="container">
-                <h1 className="title ">Registrera nytt konto</h1>
+                <h1 className="title has-text-centered">Registrera nytt konto</h1>
 
                 <form onSubmit={handleSubmit}>
 

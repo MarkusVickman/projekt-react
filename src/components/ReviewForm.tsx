@@ -1,27 +1,18 @@
-
 import React, { useEffect, useState } from "react"
 import { useReview } from "../context/ReviewContext";
 import { Review, PostReview } from "../types/review.types"
-import { useAuth } from "../context/AuthContext";
-import ReviewAdminProp from "../components/ReviewAdminProp";
-import { useParams } from "react-router-dom";
 
-
-//Interface för propsen som komponenten tar emot
+//Interface för propsen som komponenten tar emot. subTitle är bokenstitel
 interface ReviewForm {
     review: Review | null;
     bookId: string | null;
+    subTitle: string | null;
 };
 
+const ReviewForm: React.FC<ReviewForm> = ({ review, bookId, subTitle }) => {
 
-const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
-
-
-    /*
-    -läser in funktioner och data från BookContext
-    -formulärdata
-    */
-    const { userReviews, getReviews, reviews, postReview, putReview } = useReview();
+    /*-läser in funktioner och data från BookContext -formulärdata */
+    const { userReviews, reviews, postReview, putReview } = useReview();
     const [newHeading, setNewHeading] = useState('');
     const [newAbout, setNewAbout] = useState('');
     const [newBookId, setNewBookId] = useState('');
@@ -32,8 +23,7 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
     const [id, setId] = useState<number | null>(null);
     const [error, setError] = useState('');
 
-
-    //Läser in alla inlägg
+    //Läser in bookId samt fyller formuläret
     useEffect(() => {
         if (bookId) {
             setNewBookId(bookId);
@@ -43,7 +33,6 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
         }
     }, [review, bookId]);
 
-
     //Vid submit testas inmatning sen skickas det nya inlägget
     const submitPost = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,6 +40,7 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
         if (checkInput()) {
             const newReview: PostReview = {
                 heading: newHeading,
+                subTitle: subTitle,
                 about: newAbout,
                 bookId: newBookId,
                 score: newScore
@@ -76,11 +66,10 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
         if (checkInput()) {
             const newReview: PostReview = {
                 heading: newHeading,
+                subTitle: subTitle,
                 about: newAbout,
                 bookId: newBookId,
                 score: newScore,
-                // views: newViews,
-                // likes: newLikes
             }
             if (id !== null) {
                 putReview(newReview, id);
@@ -105,18 +94,21 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
 
         if (newHeading.length < 1) {
             validationErrors = false;
-            errorString = "Inlägget måste ha en titel. ";
+            errorString = "Inlägget måste ha en titel";
         }
 
         if (newAbout.length < 5) {
             validationErrors = false;
-            errorString = errorString + "Inlägget måste vara minst 5 tecken långt. ";
+            if (errorString !== "") {
+                errorString = errorString + " och inlägget måste vara minst 5 tecken långt";
+            } else {
+                errorString = "Inlägget måste vara minst 5 tecken långt";
+            }
         }
 
-        //Bör byggas ut men inte nödvändigt för prof of concept
         if (newBookId.length < 2) {
             validationErrors = false;
-            errorString = errorString + "Felaktigt bokid. ";
+            errorString = errorString + "Boken hittades inte!";
         }
 
         if (validationErrors) {
@@ -128,7 +120,7 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
         }
     }
 
-    // returneras om inläggen inte kan laddas in
+    // returneras om recensioner inte kan laddas in
     if (!reviews || !userReviews) {
 
         return (<>
@@ -137,9 +129,8 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
         </>)
     }
 
-    /* Ett formulär som kan posta nya inlägg eller redigera gamla. Knappar samt text ändras dynamiskt */
+    /* Ett formulär som kan posta nya recensioner eller redigera gamla. Knappar samt text ändras dynamiskt */
     return (
-
         <>
             {newBookId != "" &&
                 <div className="container mt-4 has-text-centered">
@@ -150,15 +141,14 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
                         <div className="field">
                             <label className="label">Titel</label>
                             <div className="control">
-                                <input className=" input" type="text" id="newheading" placeholder="Titel.." required value={newHeading} onChange={(e) => setNewHeading(e.target.value)} />
+                                <input className=" input" type="text" id="newheading" placeholder="Titel.." value={newHeading} onChange={(e) => setNewHeading(e.target.value)} />
                             </div>
                         </div>
-
 
                         <div className="field">
                             <label className="label">Recension</label>
                             <div className="control">
-                                <textarea className="textarea" id="newabout" placeholder="Skriv recension här.." required value={newAbout} onChange={(e) => setNewAbout(e.target.value)}></textarea>
+                                <textarea className="textarea" id="newabout" placeholder="Skriv recension här.." value={newAbout} onChange={(e) => setNewAbout(e.target.value)}></textarea>
                             </div>
                         </div>
 
@@ -180,13 +170,11 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
                             </div>
                         </div>
 
-
                         <div className="buttons is-centered mt-4">
                             {!id ? (
                                 <div className="control">
                                     <button className="button is-rounded is-link" type="submit">Submit</button>
                                 </div>
-
                             ) :
                                 <>
                                     <div className="control">
@@ -203,14 +191,13 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId }) => {
                             }
                         </div>
                         {error && (
-                            <div>
+                            <div className="has-text-danger">
                                 {error}
                             </div>
                         )}
                     </form >
                 </div >
             }
-
         </>
     )
 }

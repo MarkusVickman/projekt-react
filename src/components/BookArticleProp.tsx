@@ -1,20 +1,16 @@
 import { Book } from "../types/book.types"
-import { NavLink } from 'react-router-dom';
 
 //Interface för propsen som komponenten tar emot
 interface BookProps {
   book: Book;
 };
 
-//Child som tar emot props enligt interface BlogProps samt Blog
+//Child som tar emot props enligt interface BookProps samt Book
 const BookArticleProp: React.FC<BookProps> = ({ book }) => {
 
-
-
-  //Returnerar blogginlägg som visas på startsidan, singlePage samt FollowUserPage
+  //Returnerar större bokinlägg som visas på SingleBookPage
   return (
     <>
-
       <div className="card" key={book.id} title="Recensioner och läs mer">
         <div className="card-content mt-6">
           <div className="media">
@@ -50,10 +46,8 @@ const BookArticleProp: React.FC<BookProps> = ({ book }) => {
                 </ul>
               </div>
             </div>
-
           </div>
           <div className="content">{book.description}</div>
-
         </div>
       </div>
     </>

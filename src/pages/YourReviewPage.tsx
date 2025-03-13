@@ -8,25 +8,21 @@ import ReviewForm from "../components/ReviewForm";
 
 const YourReviewPage = () => {
 
-  /*
-  -läser in funktioner och data från BookContext
-  -formulärdata
-  */
+  /*-läser in funktioner och data från ReviewContext -formulärdata*/
   const { userReviews, getReviews, reviews, deleteReview } = useReview();
   const { user } = useAuth();
   const [review, setReview] = useState<Review | null>(null);
 
-  //Läser in alla inlägg
+  //Läser in alla recensioner
   useEffect(() => {
     getReviews();
   }, []);
 
-
-  //Resettar komponenten när bloginläggen uppdateras
+  //Resettar komponenten när review uppdateras
   useEffect(() => {
-    console.log(review);
   }, [review]);
 
+  //Ändrar vilket review object som ska följa med till recensionsformuläret
   const editReviewData = (review: Review) => {
     setReview(null);
 
@@ -35,48 +31,41 @@ const YourReviewPage = () => {
     }, 0);
   };
 
-  //Vid delete tas inlägget bort
+  //Vid delete tas en recension bort
   const submitDelete = async (id: number) => {
     if (id !== null) {
       deleteReview(id);
     }
   }
 
-  // returneras om inläggen inte kan laddas in
+  // returneras om review inte kan laddas in
   if (!reviews || !userReviews) {
-
     return (<>
       <h1 className="title">Dina recensioner</h1>
-      <p><b>Laddar recensioner...</b></p>;
+      <p><b>Laddar recensioner...</b></p>
     </>)
   }
 
-  /* Ett formulär som kan posta nya inlägg eller redigera gamla. Knappar samt text ändras dynamiskt */
+  /* Ett formulär som kan posta nya recensioner eller redigera gamla. Knappar samt text ändras dynamiskt */
+  // även alla recensioner skrivs ut
   return (
-
-
     <>
-      {<ReviewForm review={review} bookId={null} />}
 
+      {review && <ReviewForm review={review} bookId={null} subTitle={review.subTitle} />}
 
       {/* skriver ut aktiva användarens flöde */}
       < div className="container mt-5" >
-        <h1 className="title">Dina recensioner</h1>
-        {userReviews.slice() // Skapar en kopia av arrayen för att inte mutera originalet
-          .sort((a: Review, b: Review) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sorterar baserat på datum (nyaste först)
-          .map((review: Review) => (<ReviewAdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={editReviewData} />))}
+        <h1 className="title has-text-centered">Dina recensioner</h1>
+        {userReviews.map((review: Review) => (<ReviewAdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={editReviewData} />))}
       </div >
 
       {/* Om aktiva användaren är en admin så skrivs alla inlägg ut som också går att redigera samt ta bort */}
       {
         user && user.isAdmin ? (
           <div className="container mt-5">
-            <h2 className="title">Admin</h2>
+            <h2 className="title has-text-centered">Admin</h2>
             {reviews != null &&
-              reviews
-                .slice() // Skapar en kopia av arrayen för att inte mutera originalet
-                .sort((a: Review, b: Review) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sorterar baserat på datum (nyaste först)
-                .map((review: Review) => (<ReviewAdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={editReviewData} />))}
+              reviews.map((review: Review) => (<ReviewAdminProp review={review} key={review.id} submitDelete={submitDelete} fillForm={editReviewData} />))}
           </div>
         ) : null
       }

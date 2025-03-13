@@ -5,7 +5,6 @@ import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-import { BookProvider } from './context/BookContext';
 import YourReviewPage from './pages/YourReviewPage';
 import { ReviewProvider } from './context/ReviewContext';
 import SingleBookPage from './pages/SingleBookPage';
