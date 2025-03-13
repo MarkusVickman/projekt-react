@@ -26,7 +26,7 @@ Uppgiften gick ut på att skapa en react applikation programmerad i TypeScript f
 * Det går att gilla recensioner
 * Administratörsroll finns för att kunna ändra och ta bort andras inlägg
 
-## Testa
+## Testkör lokalt
 För att testa eller bygga vidare på projektet behöver repot klonas och kommandot ` npm install ` ska köras i terminalen.
 För att testköra ` npm run dev `
 För att publicera ` npm run build `
