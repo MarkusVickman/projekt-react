@@ -28,7 +28,7 @@ Uppgiften gick ut på att skapa en react applikation programmerad i TypeScript f
 
 ### Datahantering
 
-**Review: /review/**
+#### Recensioner
  Hämtar alla recensioner i formatet.
 
 ```bash
@@ -47,7 +47,7 @@ Uppgiften gick ut på att skapa en react applikation programmerad i TypeScript f
 }
 ```
 
-För att uppdatera recensioner skickas data med på följande sätt:
+För att uppdatera eller skapa nya recensioner skickas data med på följande sätt:
 
 ```bash
 export interface PostReview {
@@ -59,11 +59,17 @@ export interface PostReview {
 }
 ```
 
+`När ett inlägg gillas eller ett inlägg tas bort skickas endast Id med som parameter.`
+
 För att ändra, posta, gilla och för att ta bort recensioner krävs att bearer token skickas med för aktuell inloggning.
 
-### Google Books Api
+#### Google Books Api
 
-|                         | Google Books Api - response               |              
+Data object för varje bok hämtas enligt denna formatering:
+
+|                         | Google Books Api - response               |
+|-------------------------|-------------------------------------------|
+| Datatyp                 | Objektstruktur                            |                 
 |-------------------------|-------------------------------------------|
 |BokId                    |id                                         |              
 |BokTitel                 |volumeInfo.title                           |              
