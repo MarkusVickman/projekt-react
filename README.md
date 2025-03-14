@@ -26,6 +26,61 @@ Uppgiften gick ut på att skapa en react applikation programmerad i TypeScript f
 * Det går att gilla recensioner
 * Administratörsroll finns för att kunna ändra och ta bort andras inlägg
 
+### Datahantering
+
+**Review: /review/**
+ Hämtar alla recensioner i formatet.
+
+```bash
+ export interface Review {
+    id: number,
+    bookId: string,
+    heading: string,
+    subTitle: string,
+    date: Date,
+    about: string,
+    score: number,
+    likes: number,
+    views: number,
+    email: string,
+    name: string
+}
+```
+
+För att uppdatera recensioner skickas data med på följande sätt:
+
+```bash
+export interface PostReview {
+    bookId: string,
+    heading: string,
+    subTitle: string | null,
+    about: string,
+    score: number
+}
+```
+
+För att ändra, posta, gilla och för att ta bort recensioner krävs att bearer token skickas med för aktuell inloggning.
+
+### Google Books Api
+
+|                         | Google Books Api - response               |              
+|-------------------------|-------------------------------------------|
+|BokId                    |id                                         |              
+|BokTitel                 |volumeInfo.title                           |              
+|Bokundertitel            |volumeInfo.subtitle                        |            
+|Utgivare                 |volumeInfo.publisher                       |              
+|Antal sidor              |volumeInfo.pageCount                       |              
+|Beskrivning              |volumeInfo.description                     |
+|Thumbnail-bild           |volumeInfo.imageLinks?.thumbnail           |              
+|Språk                    |volumeInfo.language                        |
+|Författare               |volumeInfo.authors                         |
+|Kategori                 |volumeInfo.categories                      |
+|Publiceringsdatum        |volumeInfo.publishedDate                   |
+|isbn                     |volumeInfo.industryIdentifiers             |                    
+
+https://www.googleapis.com/books/v1/volumes${search}
+ex. https://www.googleapis.com/books/v1/volumes/fPQ9DwAAQBAJ
+
 ## Testkör lokalt
 För att testa eller bygga vidare på projektet behöver repot klonas och kommandot ` npm install ` ska köras i terminalen.
 För att testköra ` npm run dev `
