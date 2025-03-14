@@ -65,10 +65,8 @@ För att ändra, posta, gilla och för att ta bort recensioner krävs att bearer
 
 #### Google Books Api
 
-Data object för varje bok hämtas enligt denna formatering:
+Svarsdata för varje bok hämtas som object enligt denna formatering:
 
-|                         | Google Books Api - response               |
-|-------------------------|-------------------------------------------|
 | Datatyp                 | Objektstruktur                            |                 
 |-------------------------|-------------------------------------------|
 |BokId                    |id                                         |              
