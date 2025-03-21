@@ -133,7 +133,7 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
 
         } catch (error) {
             console.log("Error: " + error);
-        } finally {
+
         }
     }
 

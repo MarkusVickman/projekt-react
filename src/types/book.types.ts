@@ -21,7 +21,7 @@ export interface Book {
 }
 
 
-//Interface för att dela AuthContext med dess metoder och interfaces till sidor och komponenter
+//Interface för att dela BookContext med dess metoder och interfaces till sidor och komponenter
 export interface BookContextType {
     books: Book[] | null,
     bookSearch: (search: string) => Promise<void>;

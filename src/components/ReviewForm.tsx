@@ -46,6 +46,11 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId, subTitle }) => {
                 score: newScore
             }
             postReview(newReview);
+            setError("Recensionen sparas..");
+            setTimeout(() => {
+                EmptyForm();
+                setError("");
+            }, 2000);
         }
     }
 
@@ -73,16 +78,26 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId, subTitle }) => {
             }
             if (id !== null) {
                 putReview(newReview, id);
-            }
+                setError("Recensionen uppdateras..");
+                setTimeout(() => {
+                    cancelPut();
+                    setError("");
+                }, 2000);
+            }            
         }
     }
 
-    //Om en uppdatering avbryts återställs formuläret
-    const cancelPut = () => {
+    //Tömmer formuläret
+    const EmptyForm = () => {
         setNewAbout('');
         setNewHeading('');
-        setNewBookId('');
         setNewScore(0);
+    }
+
+    //Om en uppdatering avbryts återställs formuläret - Används vid put
+    const cancelPut = () => {
+        EmptyForm();
+        setNewBookId('');
         setId(null);
         setFormHeader("Ny recension");
     }

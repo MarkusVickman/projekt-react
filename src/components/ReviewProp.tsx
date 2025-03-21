@@ -18,7 +18,7 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
             <article className="card" key={review.id} title="Recension">
                 <div className=" mt-6">
                     <div className="card-content">
-                        <p className="title is-4 ">{review.heading}</p>
+                        <h2 className="title is-4 ">{review.heading}</h2>
                         <p className="subtitle is-6">{review.subTitle}</p>
                         <p className="">
                             {review.about}
@@ -44,7 +44,7 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review }) => {
                             </span>
                         </div>
                         <p className="card-footer-item">{review.date.toString().split('T')[0]}</p>
-                        <NavLink to={"/SingleBookPage/" + review.bookId} className="card-footer-item"><button className="">Visa Bok</button></NavLink>
+                        <NavLink to={"/SingleBookPage/" + review.bookId} className="card-footer-item">Visa Bok</NavLink>
                     </div>
                 </div>
             </article>

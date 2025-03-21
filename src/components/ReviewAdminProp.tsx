@@ -18,7 +18,7 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review, fillForm, submitDelete
             <article className="card" key={review.id} title="Recension">
                 <div className=" mt-6">
                     <div className="card-content">
-                        <p className="title is-4 ">{review.heading}</p>
+                        <h2 className="title is-4 ">{review.heading}</h2>
                         <p className="subtitle is-6" >{review.subTitle}</p>
                         <p className="">
                             {review.about}
@@ -45,7 +45,7 @@ const ReviewAdminProp: React.FC<ReviewProps> = ({ review, fillForm, submitDelete
                     <div className="card-footer">
                         <button className="card-footer-item" onClick={() => fillForm(review)}>Redigera</button>
                         <button className="card-footer-item" onClick={() => submitDelete(review.id)}>Ta bort</button>
-                        <NavLink to={"/SingleBookPage/" + review.bookId} className="card-footer-item"><button>Visa Bok</button></NavLink>
+                        <NavLink to={"/SingleBookPage/" + review.bookId} className="card-footer-item">Visa Bok</NavLink>
                     </div>
 
                 </div>

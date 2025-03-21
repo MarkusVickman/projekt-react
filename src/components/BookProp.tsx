@@ -37,7 +37,7 @@ const BookProp: React.FC<BookProps> = ({ book }) => {
             </div>
           </div>
           <div className="card-footer">
-            <NavLink to={"/SingleBookPage/" + book.id} className="card-footer-item"><button className="card-footer-item button mt-2">Läs mer</button></NavLink>
+            <NavLink to={"/SingleBookPage/" + book.id} className="card-footer-item button mt-2">Läs mer</NavLink>
           </div>
         </div>
       </div>
