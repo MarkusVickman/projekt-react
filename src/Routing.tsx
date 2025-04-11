@@ -33,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/SingleBookPage/:bookId",
-                element: (<ProtectedRoute> <SingleBookPage /> </ProtectedRoute>)
+                element: (<SingleBookPage />)
             },
             {
                 path: "/login",

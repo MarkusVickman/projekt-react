@@ -7,12 +7,15 @@ import { Review } from "../types/review.types";
 import ReviewProp from "../components/ReviewProp";
 import { useReview } from "../context/ReviewContext";
 import ReviewForm from "../components/ReviewForm";
+import { useAuth } from "../context/AuthContext";
 
 // Sida/komponent för visning av en bok
 const SingleBookPage = () => {
 
     // Läser in html-parameter
     const { bookId } = useParams();
+
+    const { user } = useAuth();
 
     //Hämtar bok, alla recensioner och funktioner för att söka bok samt uppdatera recensioner
     const { books, bookSearch } = useBook();
@@ -51,13 +54,22 @@ const SingleBookPage = () => {
                 {item && <BookArticleProp book={item} key={item.id} />}
             </div>
 
-            {<ReviewForm review={null} bookId={item.id} subTitle={item.title} />}
+            {user ? (
+            <ReviewForm review={null} bookId={item.id} subTitle={item.title} />
+            ) : null}
 
             {/* skriver ut aktiva användarens flöde */}
-            < div className="container mt-5" >
-                <h1 className="title has-text-centered">Recensioner</h1>
+            {bookReviews && bookReviews.length > 0 ? (
+            < div className="container" >
+                <h1 className="mt-5 title has-text-centered">Recensioner</h1>
                 {bookReviews.map((review: Review) => (<ReviewProp review={review} key={review.id} />))}
             </div >
+             ) : (
+                <div className="">
+                  <p className="subtitle has-text-centered  mt-5 mb-5">Denna bok har inga recensioner</p>
+                </div>
+              )}
+            
         </>
     )
 }

@@ -139,8 +139,7 @@ const ReviewForm: React.FC<ReviewForm> = ({ review, bookId, subTitle }) => {
     if (!reviews || !userReviews) {
 
         return (<>
-            <h1 className="title">Dina recensioner</h1>
-            <p><b>Laddar recensioner...</b></p>;
+            
         </>)
     }
 
