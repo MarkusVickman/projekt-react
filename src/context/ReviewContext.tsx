@@ -22,7 +22,7 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
     const getReviews = async () => {
 
         try {
-            const res = await fetch("https://project-react-nest-backend-1050979898493.us-central1.run.app/review/", {
+            const res = await fetch("https://project-react-nest-backend.onrender.com/review/", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -64,7 +64,7 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
             return;
         }
         try {
-            const res = await fetch(`https://project-react-nest-backend-1050979898493.us-central1.run.app/review/like/${id}`, {
+            const res = await fetch(`https://project-react-nest-backend.onrender.com/review/like/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
             return;
         }
         try {
-            const res = await fetch("https://project-react-nest-backend-1050979898493.us-central1.run.app/review/create", {
+            const res = await fetch("https://project-react-nest-backend.onrender.com/review/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
             return;
         }
         try {
-            const res = await fetch(`https://project-react-nest-backend-1050979898493.us-central1.run.app/review/update/${id}`, {
+            const res = await fetch(`https://project-react-nest-backend.onrender.com/review/update/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -145,7 +145,7 @@ export const ReviewProvider: React.FC<ReviewProviderProps> = ({ children }) => {
             return;
         }
         try {
-            const res = await fetch(`https://project-react-nest-backend-1050979898493.us-central1.run.app/review/delete/${id}`, {
+            const res = await fetch(`https://project-react-nest-backend.onrender.com/review/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
