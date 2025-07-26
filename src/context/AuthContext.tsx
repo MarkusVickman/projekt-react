@@ -20,7 +20,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const login = async (credentials: LoginCredentials) => {
 
         try {
-            const res = await fetch("https://project-react-nest-backend-1050979898493.us-central1.run.app/auth/login", {
+            const res = await fetch("https://project-react-nest-backend.onrender.com/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const register = async (credentials: RegisterCredentials) => {
 
         try {
-            const res = await fetch("https://project-react-nest-backend-1050979898493.us-central1.run.app/user/register", {
+            const res = await fetch("https://project-react-nest-backend.onrender.com/user/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -82,7 +82,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             return;
         }
         try {
-            const res = await fetch("https://project-react-nest-backend-1050979898493.us-central1.run.app/auth/profile", {
+            const res = await fetch("https://project-react-nest-backend.onrender.com/auth/profile", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
